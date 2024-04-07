@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     public void confirmaEdit(Categoria categoriaEditando, Categoria categoria) {
         AlertDialog.Builder bld = new AlertDialog.Builder(MainActivity.this);
         bld.setTitle("Confirmar");
-        bld.setMessage("Confirma a adição da categoria: " + categoria.getDescricao() + " ?");
+        bld.setMessage("Confirma a alteração da categoria: " + categoria.getDescricao() + " ?");
 
         bld.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             @Override
