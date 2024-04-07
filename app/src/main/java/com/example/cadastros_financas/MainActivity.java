@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         if (categorias == null) {
             categorias = new ArrayList<Categoria>();
         }
-
         fragListaCategoria.setCategorias(categorias);
     }
 
@@ -53,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
             Categoria categoria = fragCadastroCategoria.validarDados();
             if (categoria != null) {
                 if (categoriaEditando != null) {
-                    fragListaCategoria.substituir(categoriaEditando, categoria);
+                    this.confirmaEdit(categoriaEditando, categoria);
                     Log.d("CATEGORIA", "Alterada");
                 } else {
-                    this.confirmaAddEdit(categoria);
+                    this.confirmaAdd(categoria);
                     Log.d("CATEGORIA", "Adicionada");
                 }
                 categoriaEditando = null;
@@ -92,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //----------------------------------------------------------------
-    public void confirmaAddEdit(Categoria categoria) {
+    public void confirmaAdd(Categoria categoria) {
         AlertDialog.Builder bld = new AlertDialog.Builder(MainActivity.this);
         bld.setTitle("Confirmar");
         bld.setMessage("Confirma a adição da categoria: " + categoria.getDescricao() + " ?");
@@ -101,6 +100,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 fragListaCategoria.adicionar(categoria);
+            }
+        });
+
+        bld.setNeutralButton("Cancelar", null);
+
+        bld.show();
+    }
+
+    //----------------------------------------------------------------
+    public void confirmaEdit(Categoria categoriaEditando, Categoria categoria) {
+        AlertDialog.Builder bld = new AlertDialog.Builder(MainActivity.this);
+        bld.setTitle("Confirmar");
+        bld.setMessage("Confirma a adição da categoria: " + categoria.getDescricao() + " ?");
+
+        bld.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                fragListaCategoria.substituir(categoriaEditando, categoria);
             }
         });
 
