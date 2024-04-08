@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -125,4 +128,32 @@ public class MainActivity extends AppCompatActivity {
 
         bld.show();
     }
+
+    //----------------------------------------------------------------
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    //----------------------------------------------------------------
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        if(menuItem.getItemId() == R.id.item_addConta){
+            addConta(fragListaCategoria.getCategoriaSelecionada());
+        }
+        return super.onOptionsItemSelected(menuItem);
+    }
+
+    //----------------------------------------------------------------
+    public void addConta(Categoria categoria){
+        if(categoria == null){
+            Toast.makeText(this, "Selecione uma categoria para adicionar uma conta", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent it = new Intent(this, ContasActivity.class);
+        it.putExtra("categoria", categoria);
+        startActivity(it);
+//        startActivityForResult(it, 123);
+    }
+
 }

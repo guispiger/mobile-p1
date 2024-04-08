@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".CadastroContaFragment">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nome da Categoria"
+        android:id="@+id/edDescricaoCategoria"
+        android:textSize="20sp"
+        android:gravity="center"/>
 
     <EditText
         android:id="@+id/edDescricao"
@@ -15,17 +22,20 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <EditText
             android:id="@+id/edValor"
-            android:layout_width="match_parent"
+            android:layout_width="0sp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:hint="Valor" />
 
         <EditText
             android:id="@+id/edVencimento"
-            android:layout_width="match_parent"
+            android:layout_width="0sp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:inputType="date"
             android:hint="Vencimento" />
