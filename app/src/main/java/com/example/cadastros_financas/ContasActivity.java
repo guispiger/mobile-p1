@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ public class ContasActivity extends AppCompatActivity {
     ListaContasFragment fragListaContas;
     Conta contaEditando = null;
     Categoria categoria;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,9 @@ public class ContasActivity extends AppCompatActivity {
 
         fragCadastroConta = (CadastroContaFragment) getFragmentManager().findFragmentByTag("fragCadastroConta");
         fragListaContas = (ListaContasFragment) getFragmentManager().findFragmentByTag("fragListaContas");
+
+        fragCadastroConta.setEdDescricaoCategoria(categoria.getDescricao());
+
         if (savedInstanceState != null) {
             contas = (ArrayList<Conta>) savedInstanceState.getSerializable("listaContas");
         }
