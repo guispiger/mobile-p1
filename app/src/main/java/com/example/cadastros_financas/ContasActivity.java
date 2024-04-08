@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,9 +30,13 @@ public class ContasActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             contas = (ArrayList<Conta>) savedInstanceState.getSerializable("listaContas");
         }
+        if(categoria.getContas() != null){
+            contas = categoria.getContas();
+        }
         if (contas == null) {
             contas = new ArrayList<Conta>();
         }
+
         fragListaContas.setContas(contas);
     }
 
@@ -72,6 +74,11 @@ public class ContasActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 fragListaContas.adicionar(conta);
+
+                Intent itResult = new Intent();
+                itResult.putExtra("contas", fragListaContas.getContas());
+                setResult(RESULT_OK, itResult);
+                finish();
             }
         });
 

@@ -1,5 +1,6 @@
 package com.example.cadastros_financas;
 
+
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
@@ -112,6 +113,7 @@ public class ListaContasFragment extends Fragment implements AdapterView.OnItemC
             adapter.notifyDataSetChanged();
         }
     }
+
     //-----------------------------------------------------------------
     public boolean remover(Categoria categoria) {
         try {
@@ -122,5 +124,10 @@ public class ListaContasFragment extends Fragment implements AdapterView.OnItemC
             Log.d("LISTA-CONTAS", e.getMessage());
             return false;
         }
+    }
+
+    //-----------------------------------------------------------------
+    public ArrayList<Conta> getContas(){
+        return contas;
     }
 }

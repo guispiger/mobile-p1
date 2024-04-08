@@ -4,17 +4,13 @@ package com.example.cadastros_financas;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Categoria> categorias;
     CadastroCategoriaFragment fragCadastroCategoria;
     ListaCategoriaFragment fragListaCategoria;
-    Categoria categoriaEditando = null;
+    Categoria categoriaSelecionada = null;
+
 
     //-----------------------------------------------------------------
     @Override
@@ -47,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle bld) {
         super.onSaveInstanceState(bld);
         bld.putSerializable("listaCategorias", categorias);
+        bld.putSerializable("categoriaSelecionada", categoriaSelecionada);
     }
 
     //-----------------------------------------------------------------
@@ -54,14 +52,14 @@ public class MainActivity extends AppCompatActivity {
         if (fragCadastroCategoria != null) {
             Categoria categoria = fragCadastroCategoria.validarDados();
             if (categoria != null) {
-                if (categoriaEditando != null) {
-                    this.confirmaEdit(categoriaEditando, categoria);
+                if (categoriaSelecionada != null) {
+                    this.confirmaEdit(categoriaSelecionada, categoria);
                     Log.d("CATEGORIA", "Alterada");
                 } else {
                     this.confirmaAdd(categoria);
                     Log.d("CATEGORIA", "Adicionada");
                 }
-                categoriaEditando = null;
+                categoriaSelecionada = null;
             }
         }
     }
@@ -88,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Selecione a categoria a editar", Toast.LENGTH_SHORT).show();
             } else {
                 fragCadastroCategoria.ajustarEdicao(categoria);
-                categoriaEditando = categoria;
+                categoriaSelecionada = categoria;
             }
         }
     }
@@ -139,7 +137,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem){
         if(menuItem.getItemId() == R.id.item_addConta){
-            addConta(fragListaCategoria.getCategoriaSelecionada());
+            categoriaSelecionada = fragListaCategoria.getCategoriaSelecionada();
+            addConta(categoriaSelecionada);
         }
         return super.onOptionsItemSelected(menuItem);
     }
@@ -152,8 +151,20 @@ public class MainActivity extends AppCompatActivity {
         }
         Intent it = new Intent(this, ContasActivity.class);
         it.putExtra("categoria", categoria);
-        startActivity(it);
-//        startActivityForResult(it, 123);
+        startActivityForResult(it, 123);
     }
 
+    @Override
+    public void onActivityResult(int requisicao, int resposta, Intent dados){
+        super.onActivityResult(requisicao,resposta,dados);
+        if(requisicao == 123 && resposta == RESULT_OK){
+            ArrayList<Conta> contas = (ArrayList<Conta>) dados.getSerializableExtra("contas");
+
+            Categoria categoriaContas = new Categoria(categoriaSelecionada.getDescricao());
+            categoriaContas.setContas(contas);
+            fragListaCategoria.substituir(categoriaSelecionada, categoriaContas);
+
+            categoriaSelecionada = null;
+        }
+    }
 }
