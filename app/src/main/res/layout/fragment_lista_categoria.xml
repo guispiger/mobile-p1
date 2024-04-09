@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:text="Contas Agrupadas"/>
+        android:text="@string/TitleListaCategorias"/>
     <ListView android:layout_weight="5"
         android:layout_height="0sp"
         android:layout_width="match_parent"
@@ -22,12 +22,12 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Editar"
+            android:text="@string/BtnEditar"
             android:onClick="editarCategoria"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Remover"
+            android:text="@string/BtnRemover"
             android:onClick="removerCategoria"/>
     </LinearLayout>
 </LinearLayout>

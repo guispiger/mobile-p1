@@ -9,7 +9,7 @@
         android:layout_width="0sp"
         android:layout_weight="0.5"
         android:layout_height="wrap_content"
-        android:text="Categoria: "
+        android:text="@string/TitleCategoria"
         android:textSize="15sp"/>
 
     <EditText
@@ -25,5 +25,5 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:onClick="adicionar"
-        android:text="Adicionar"/>
+        android:text="@string/adicionar"/>
 </LinearLayout>

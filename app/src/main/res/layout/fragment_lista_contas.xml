@@ -18,12 +18,12 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Editar"
+            android:text="@string/BtnEditar"
             android:onClick="editarConta"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Remover"
+            android:text="@string/BtnRemover"
             android:onClick="removerConta"/>
     </LinearLayout>
 

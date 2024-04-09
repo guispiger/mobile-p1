@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         fragListaCategoria = (ListaCategoriaFragment) getFragmentManager().findFragmentByTag("fragListaCategorias");
         if (savedInstanceState != null) {
             categorias = (ArrayList<Categoria>) savedInstanceState.getSerializable("listaCategorias");
+            categoriaSelecionada = (Categoria) savedInstanceState.getSerializable("categoriaSelecionada");
         }
         if (categorias == null) {
             categorias = new ArrayList<Categoria>();

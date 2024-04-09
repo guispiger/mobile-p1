@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nome da Categoria"
+        android:text="@string/nome_da_categoria"
         android:id="@+id/edDescricaoCategoria"
         android:textSize="20sp"
         android:gravity="center"/>
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:hint="Descrição" />
+        android:hint="@string/descricao" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,15 +30,14 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:hint="Valor" />
+            android:hint="@string/valor" />
 
         <TextView
             android:id="@+id/txtVencimento"
             android:layout_width="0sp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:inputType="date"
-            android:hint="Selecionar o Vencimento"
+            android:hint="@string/selecionar_o_vencimento"
             android:gravity="center"
             android:onClick="selecionarVencimento"/>
     </LinearLayout>
@@ -47,6 +46,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="cadastrarConta"
-        android:text="OK" />
+        android:text="@string/ok" />
 
 </LinearLayout>
