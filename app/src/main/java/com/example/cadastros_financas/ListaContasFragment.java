@@ -115,9 +115,9 @@ public class ListaContasFragment extends Fragment implements AdapterView.OnItemC
     }
 
     //-----------------------------------------------------------------
-    public boolean remover(Categoria categoria) {
+    public boolean remover(Conta conta) {
         try {
-            contas.remove(categoria);
+            contas.remove(conta);
             adapter.notifyDataSetChanged();
             return true;
         }catch (Exception e){

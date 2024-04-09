@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -67,6 +68,33 @@ public class ContasActivity extends AppCompatActivity {
                     Log.d("CONTA", "Adicionada");
                 }
                 contaEditando = null;
+            }
+        }
+    }
+
+    //----------------------------------------------------------------
+    public void removerConta(View v) {
+        if (fragListaContas != null) {
+            Conta conta = fragListaContas.getContaSelecionada();
+            if (conta == null) {
+                Toast.makeText(this, "Selecione a conta que deseja remover", Toast.LENGTH_SHORT).show();
+            } else {
+                if (!fragListaContas.remover(conta)) {
+                    Toast.makeText(this, "Erro inesperado ao remover conta, verificar Logs!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    //----------------------------------------------------------------
+    public void editarConta(View v) {
+        if (fragListaContas != null) {
+            Conta conta = fragListaContas.getContaSelecionada();
+            if (conta == null) {
+                Toast.makeText(this, "Selecione a conta a editar", Toast.LENGTH_SHORT).show();
+            } else {
+                fragCadastroConta.ajustarEdicao(conta);
+                contaEditando = conta;
             }
         }
     }

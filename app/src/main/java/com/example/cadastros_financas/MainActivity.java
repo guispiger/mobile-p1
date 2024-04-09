@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         if (fragListaCategoria != null) {
             Categoria categoria = fragListaCategoria.getCategoriaSelecionada();
             if (categoria == null) {
-                Toast.makeText(this, "Selecione o categoria que deseja remover", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Selecione a categoria que deseja remover", Toast.LENGTH_SHORT).show();
             } else {
                 if (!fragListaCategoria.remover(categoria)) {
                     Toast.makeText(this, "Erro inesperado ao remover categoria, verificar Logs!", Toast.LENGTH_SHORT).show();
