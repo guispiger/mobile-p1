@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             Categoria categoria = fragCadastroCategoria.validarDados();
             if (categoria != null) {
                 if (categoriaSelecionada != null) {
+                    categoria.setContas(categoriaSelecionada.getContas());
                     this.confirmaEdit(categoriaSelecionada, categoria);
                     Log.d("CATEGORIA", "Alterada");
                 } else {
