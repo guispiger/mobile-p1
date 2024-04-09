@@ -2,4 +2,6 @@
     <string name="app_name">Cadastros Finanças</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="voltar">Voltar</string>
+    <string name="adicionar">Adicionar</string>
 </resources>

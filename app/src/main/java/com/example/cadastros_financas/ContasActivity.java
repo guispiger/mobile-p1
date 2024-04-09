@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -42,7 +43,14 @@ public class ContasActivity extends AppCompatActivity {
         fragCadastroConta.setEdDescricaoCategoria(categoria.getDescricao());
 
         if (savedInstanceState != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             contas = (ArrayList<Conta>) savedInstanceState.getSerializable("listaContas");
+            try {
+                data = sdf.parse(savedInstanceState.getString("data"));
+                fragCadastroConta.defineVencimento(data);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
         }
         if(categoria.getContas() != null){
             contas = categoria.getContas();
@@ -58,7 +66,9 @@ public class ContasActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle bld) {
         super.onSaveInstanceState(bld);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         bld.putSerializable("listaContas", contas);
+        bld.putString("data", sdf.format(data));
     }
 
     //-----------------------------------------------------------------

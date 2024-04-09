@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/item_nome"
+        android:paddingLeft="30sp"
         android:text="Categoria"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,6 +27,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/item_valor"
             android:gravity="right"
-            android:text="R$ 123,23"/>
+            android:text="R$ 123,23"
+            android:paddingRight="10sp"/>
     </LinearLayout>
 </LinearLayout>
