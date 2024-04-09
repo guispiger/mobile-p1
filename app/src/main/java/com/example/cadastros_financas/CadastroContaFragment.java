@@ -1,5 +1,6 @@
 package com.example.cadastros_financas;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import android.app.Fragment;
@@ -7,6 +8,7 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,9 +19,11 @@ import java.util.Date;
 
 public class CadastroContaFragment extends Fragment {
     EditText edDescricao;
-    EditText edVencimento;
     EditText edValor;
+    TextView txtVencimento;
     TextView edDescricaoCategoria;
+    Date dataVencimento = null;
+
     //-----------------------------------------------------------------
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,23 +38,16 @@ public class CadastroContaFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_cadastro_conta, container, false);
         edDescricao = (EditText) v.findViewById(R.id.edDescricao);
-        edVencimento = (EditText) v.findViewById(R.id.edVencimento);
         edValor = (EditText) v.findViewById(R.id.edValor);
+        txtVencimento = (TextView) v.findViewById(R.id.txtVencimento);
         edDescricaoCategoria = (TextView) v.findViewById(R.id.edDescricaoCategoria);
         return v;
     }
 
     //-----------------------------------------------------------------
     public Conta validarDados(Categoria categoria){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
         String descricao = edDescricao.getText().toString().trim();
-        Date vencimento = null;
-        try {
-            vencimento = sdf.parse(edVencimento.getText().toString());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        Date vencimento = dataVencimento;
         Double valor = Double.parseDouble(edValor.getText().toString());
 
         if(descricao == null || descricao.isEmpty() || vencimento == null || valor == null){
@@ -58,7 +55,7 @@ public class CadastroContaFragment extends Fragment {
             return null;
         }
         edDescricao.setText("");
-        edVencimento.setText("");
+        txtVencimento.setText("Selecionar o Vencimento");
         edValor.setText("");
 
         return new Conta(descricao, vencimento, valor, categoria);
@@ -67,12 +64,26 @@ public class CadastroContaFragment extends Fragment {
     //-----------------------------------------------------------------
     public void ajustarEdicao(Conta c){
         edDescricao.setText(c.getDescricao());
-        edVencimento.setText(c.getVencimento().toString());
+        apresentaVencimentoEmTela(c.getVencimento());
+        defineVencimento(c.getVencimento());
         edValor.setText(Double.toString(c.getValor()));
     }
 
     //-----------------------------------------------------------------
     public void setEdDescricaoCategoria(String descricaoCategoria){
         edDescricaoCategoria.setText(descricaoCategoria);
+    }
+
+    //-----------------------------------------------------------------
+    public void defineVencimento(Date data) {
+        dataVencimento = data;
+        apresentaVencimentoEmTela(data);
+
+    }
+
+    //-----------------------------------------------------------------
+    public void apresentaVencimentoEmTela(Date data){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        txtVencimento.setText(sdf.format(data));
     }
 }

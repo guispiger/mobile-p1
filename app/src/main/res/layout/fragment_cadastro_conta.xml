@@ -32,13 +32,15 @@
             android:inputType="numberDecimal"
             android:hint="Valor" />
 
-        <EditText
-            android:id="@+id/edVencimento"
+        <TextView
+            android:id="@+id/txtVencimento"
             android:layout_width="0sp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:inputType="date"
-            android:hint="Vencimento" />
+            android:hint="Selecionar o Vencimento"
+            android:gravity="center"
+            android:onClick="selecionarVencimento"/>
     </LinearLayout>
     <Button
         android:id="@+id/button"

@@ -1,5 +1,6 @@
 package com.example.cadastros_financas;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,13 +8,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ContasActivity extends AppCompatActivity {
     ArrayList<Conta> contas;
@@ -21,6 +26,7 @@ public class ContasActivity extends AppCompatActivity {
     ListaContasFragment fragListaContas;
     Conta contaEditando = null;
     Categoria categoria;
+    Date data = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,5 +170,19 @@ public class ContasActivity extends AppCompatActivity {
     public void onBackPressed() {
         devolveContas();
         super.onBackPressed();
+    }
+
+    //----------------------------------------------------------------
+    public void selecionarVencimento(View v){
+        DatePickerDialog dpd = new DatePickerDialog(this);
+        dpd.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int ano, int mes, int dia) {
+                ano = ano - 1900;
+                data = new Date(ano, mes, dia);
+                fragCadastroConta.defineVencimento(data);
+            }
+        });
+        dpd.show();
     }
 }

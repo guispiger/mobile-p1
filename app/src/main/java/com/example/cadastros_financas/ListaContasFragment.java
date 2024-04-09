@@ -27,9 +27,9 @@ public class ListaContasFragment extends Fragment implements AdapterView.OnItemC
     ArrayList<Conta> contas;
     ContaAdapter adapter;
     int selectedPosition = -1;
-    static SimpleDateFormat sdf = new SimpleDateFormat();
     //-----------------------------------------------------------------
     class ContaAdapter extends ArrayAdapter<Conta> {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         public ContaAdapter(Context context) {
             super(context, 0, contas);
         }
