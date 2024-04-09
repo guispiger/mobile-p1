@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -79,11 +81,6 @@ public class ContasActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 fragListaContas.adicionar(conta);
-
-                Intent itResult = new Intent();
-                itResult.putExtra("contas", fragListaContas.getContas());
-                setResult(RESULT_OK, itResult);
-                finish();
             }
         });
 
@@ -110,4 +107,34 @@ public class ContasActivity extends AppCompatActivity {
         bld.show();
     }
 
+    //----------------------------------------------------------------
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_contas, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //----------------------------------------------------------------
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        if(menuItem.getItemId() == R.id.item_voltar){
+            devolveContas();
+        }
+        return super.onOptionsItemSelected(menuItem);
+    }
+
+    //----------------------------------------------------------------
+    public void devolveContas(){
+        Intent itResult = new Intent();
+        itResult.putExtra("contas", fragListaContas.getContas());
+        setResult(RESULT_OK, itResult);
+        finish();
+    }
+
+    //----------------------------------------------------------------
+    @Override
+    public void onBackPressed() {
+        devolveContas();
+        super.onBackPressed();
+    }
 }
