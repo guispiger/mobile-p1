@@ -73,6 +73,11 @@ public class ListaCategoriaFragment extends Fragment implements AdapterView.OnIt
     }
 
     //-----------------------------------------------------------------
+   public ListView retornaListViewCategorias(){
+        return listaCategoria;
+   }
+
+    //-----------------------------------------------------------------
     public void adicionar(Categoria c) {
         categorias.add(c);
         adapter.notifyDataSetChanged();

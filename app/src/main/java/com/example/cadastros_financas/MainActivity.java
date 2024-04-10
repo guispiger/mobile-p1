@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -38,6 +39,17 @@ public class MainActivity extends AppCompatActivity {
             categorias = new ArrayList<Categoria>();
         }
         fragListaCategoria.setCategorias(categorias);
+
+        fragListaCategoria.retornaListViewCategorias().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                categoriaSelecionada = categorias.get(position);
+                Intent it = new Intent(getApplicationContext(), ContasActivity.class);
+                it.putExtra("categoria", categoriaSelecionada);
+                startActivityForResult(it, 123);
+                return false;
+            }
+        });
     }
 
     //-----------------------------------------------------------------

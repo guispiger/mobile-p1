@@ -48,7 +48,11 @@ public class CadastroContaFragment extends Fragment {
     public Conta validarDados(Categoria categoria){
         String descricao = edDescricao.getText().toString().trim();
         Date vencimento = dataVencimento;
-        Double valor = Double.parseDouble(edValor.getText().toString());
+        String vlString = edValor.getText().toString().trim();
+        Double valor = null;
+        if(!vlString.isEmpty()){
+            valor = Double.parseDouble(vlString);
+        }
 
         if(descricao == null || descricao.isEmpty() || vencimento == null || valor == null){
             Toast.makeText(getActivity(), "É necessário informar todos os dados!", Toast.LENGTH_SHORT).show();
